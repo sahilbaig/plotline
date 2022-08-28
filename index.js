@@ -1,8 +1,9 @@
 
 import calculateDistance from './calculate-distance.js'
-import map from './initialize-map.js';
+import initMap from './initialize-map.js';
 
 var places=new Array()
+var map=initMap()
 
 // fucntion to place markers and destination and source
 const placeMarker=()=>{
