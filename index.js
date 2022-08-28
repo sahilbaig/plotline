@@ -1,20 +1,31 @@
 
 import calculateDistance from './calculate-distance.js'
-import initMap from './initialize-map.js';
+// import map from './initialize-map.js';
+var map;
+function initMap(){
+    var option ={
+        zoom:8,
+        center:{lat:42.3601,lng:-71.0598}
+    }
+    map=new google.maps.Map(document.getElementById('map'),option);
+}
+
+
+initMap()
 
 var places=new Array()
-var map=initMap()
 
 // fucntion to place markers and destination and source
 const placeMarker=()=>{
     
+    initMap()
     for(var i=0;i<places.length-2;i++){
-        console.log(places[i])
         places[i].setMap(null)
         
     }
 
     // removes redundant markers from map
+
     places[places.length-1].setMap(map)
     places[places.length-2].setMap(map)
 
@@ -28,7 +39,6 @@ var bounds = new google.maps.LatLngBounds(); // Defines bounds to recenter maps 
 // Drawing path between source and destination
 const drawPath = (source,destination)=>{    
     const directionsService = new google.maps.DirectionsService();
-
     directionsService.route(
         {
                 origin: source,
@@ -105,7 +115,6 @@ calculateButton.addEventListener("click",()=>{
     if(origin_input && destination_input){
             
         calculateDistance()
-        console.log(places)
         placeMarker()
         drawPath(source,destination)
 
