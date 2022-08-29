@@ -1,6 +1,5 @@
 
 import calculateDistance from './calculate-distance.js'
-// import map from './initialize-map.js';
 var map;
 function initMap(){
     var option ={
@@ -14,18 +13,17 @@ function initMap(){
 initMap()
 
 var places=new Array()
-
 // fucntion to place markers and destination and source
 const placeMarker=()=>{
     
     initMap()
+    // removes redundant markers from map
     for(var i=0;i<places.length-2;i++){
         places[i].setMap(null)
         
     }
 
-    // removes redundant markers from map
-
+    //Adds new markers
     places[places.length-1].setMap(map)
     places[places.length-2].setMap(map)
 
@@ -56,6 +54,8 @@ const drawPath = (source,destination)=>{
                 }
             }
         )
+
+        // for setting boundary of the map
         bounds.extend(source);
         bounds.extend(destination)
         map.fitBounds(bounds);
@@ -81,8 +81,7 @@ function initialize() {
                 position: new google.maps.LatLng(latitude, longitude),
                 map: map
             });
-    
-        places.push(marker)
+        places[0]=(marker)
         });
 
 
@@ -100,8 +99,7 @@ function initialize() {
                 position: new google.maps.LatLng(latitude, longitude),
                 map: map
                });
-      
-            places.push(marker)
+            places[1]=(marker)
         })
     }
 
@@ -112,12 +110,10 @@ calculateButton.addEventListener("click",()=>{
     
     var origin_input = $('#source').val();
     var destination_input = $('#destination').val();
-    if(origin_input && destination_input){
-            
+    if(origin_input && destination_input){            
         calculateDistance()
         placeMarker()
         drawPath(source,destination)
-
 
     }
 })
