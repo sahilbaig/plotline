@@ -76,12 +76,11 @@ function initialize() {
             source.lat=latitude
             source.lng=longitude
             //Defining latitude and longitude of source
-        //    (new google.maps.LatLng(latitude, longitude))
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(latitude, longitude),
                 map: map
             });
-        places[0]=(marker)
+        places[0]=(marker) //Places[0] denotes source
         });
 
 
@@ -99,7 +98,7 @@ function initialize() {
                 position: new google.maps.LatLng(latitude, longitude),
                 map: map
                });
-            places[1]=(marker)
+            places[1]=(marker) //Places[1] denotes destination
         })
     }
 
@@ -111,12 +110,13 @@ calculateButton.addEventListener("click",()=>{
     var origin_input = $('#source').val();
     var destination_input = $('#destination').val();
     if(origin_input && destination_input){            
-        calculateDistance()
-        placeMarker()
-        drawPath(source,destination)
+        calculateDistance()                 //calculating distance between points
+        placeMarker()                       //place markers at source and destination
+        drawPath(source,destination)        //draws path between markers 
 
     }
 })
 
 
+// Loads the map 
 google.maps.event.addDomListener(window, 'load', initialize);
